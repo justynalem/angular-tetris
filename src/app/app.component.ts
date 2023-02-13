@@ -7,7 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'tetris';
-  onLineCleared = () => {
-    console.log('line cleared');
-  };
+
+  public readyToPlay = false;
+
+  public onFormCompleted(playerName: string) {
+    if (playerName) {
+      this.readyToPlay = true;
+    }
+  }
 }

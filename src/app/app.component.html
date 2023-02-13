@@ -1,10 +1,7 @@
-<tetris-core #game (lineCleared)="onLineCleared()"></tetris-core>
+<div *ngIf="!readyToPlay">
+  <app-form (formCompleted)="onFormCompleted($event)"></app-form>
+</div>
 
-<button (click)="game.actionStart()">Start</button>
-<button (click)="game.actionStop()">Stop</button>
-<button (click)="game.actionReset()">Reset</button>
-<button (click)="game.actionRotate()">Rotate</button>
-<button (click)="game.actionLeft()">Left</button>
-<button (click)="game.actionRight()">Right</button>
-<button (click)="game.actionDown()">Down</button>
-<button (click)="game.actionDrop()">Drop</button>
+<div *ngIf="readyToPlay">
+  <app-game></app-game>
+</div>
