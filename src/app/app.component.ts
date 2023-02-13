@@ -8,11 +8,19 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'tetris';
 
+  public activePlayer: string = '';
   public readyToPlay = false;
 
   public onFormCompleted(playerName: string) {
     if (playerName) {
       this.readyToPlay = true;
+      this.activePlayer = playerName;
+    }
+  }
+
+  public onGameFinished(gameFinished: boolean) {
+    if (gameFinished) {
+      this.readyToPlay = false;
     }
   }
 }

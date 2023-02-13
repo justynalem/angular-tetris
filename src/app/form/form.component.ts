@@ -6,7 +6,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent {
-  @Output() public formCompleted = new EventEmitter();
+  @Output() public formCompleted = new EventEmitter<string>();
 
   public onSubmit(playerName: string) {
     this.formCompleted.emit(playerName);

@@ -1,9 +1,27 @@
-<tetris-core #game (lineCleared)="onLineCleared()"></tetris-core>
-<button (click)="game.actionStart()">Start</button>
-<button (click)="game.actionStop()">Stop</button>
-<button (click)="game.actionReset()">Reset</button>
-<button (click)="game.actionRotate()">Rotate</button>
-<button (click)="game.actionLeft()">Left</button>
-<button (click)="game.actionRight()">Right</button>
-<button (click)="game.actionDown()">Down</button>
-<button (click)="game.actionDrop()">Drop</button>
+<h1>Welcome {{ playerName }}</h1>
+<p>{{ gameStatus }}</p>
+
+<br />
+<div class="gameControl">
+  <button (click)="game.actionStart(); gameStarted()">START</button>
+  <button (click)="game.actionStop(); gameStopped()">STOP</button>
+  <button (click)="game.actionReset()">RESET</button>
+</div>
+<div>
+  <tetris-core
+    #game
+    (lineCleared)="onLineCleared()"
+    (gameOver)="onGameOver()"
+  ></tetris-core>
+</div>
+
+<button (click)="game.actionRotate()">ROTATE</button>
+<button (click)="game.actionLeft()">LEFT</button>
+<button (click)="game.actionRight()">RIGHT</button>
+<button (click)="game.actionDown()">DOWN</button>
+<button (click)="game.actionDrop()">DROP</button>
+
+<p>Your score: {{ score }}</p>
+<p>Time played: {{ gameplayTime }}</p>
+
+<button (click)="onClick()">EXIT GAME</button>
