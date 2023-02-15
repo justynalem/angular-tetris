@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'tetris';
 
   public activePlayer = '';
-  public readyToPlay = true;
+  public readyToPlay = false;
 
   public onFormCompleted(playerName: string) {
     if (playerName) {

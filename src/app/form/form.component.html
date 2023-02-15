@@ -1,8 +1,9 @@
-<header>
+<header class="header">
   <h1>WELCOME TO TETRIS WORLD!</h1>
 </header>
 
 <form
+  class="playerForm"
   #playerForm="ngForm"
   (submit)="onSubmit(playerForm.form.value.playerName)"
 >
@@ -16,7 +17,10 @@
     required
     ngModel
   />
-  <p *ngIf="playerNameModel.touched && playerNameModel.invalid">
+  <p
+    class="errorMessage"
+    *ngIf="playerNameModel.touched && playerNameModel.invalid"
+  >
     PLEASE ENTER VALID PLAYER NAME (MIN 3 CHARACTERS)
   </p>
   <br />
@@ -31,7 +35,7 @@
     placeholder="ENTER YOUR EMAIL"
     ngModel
   />
-  <p *ngIf="emailModel.touched && emailModel.invalid">
+  <p class="errorMessage" *ngIf="emailModel.touched && emailModel.invalid">
     PLEASE, ENTER A VALID EMAIL ADRESS
   </p>
   <br />

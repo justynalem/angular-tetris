@@ -1,22 +1,12 @@
-input {
-  &.ng-touched {
-    &.ng-invalid {
-      border: 3px solid red;
-    }
-  }
-}
-
-p {
+.errorMessage {
   color: red;
 }
 
-* {
-  box-sizing: border-box;
-}
-header {
+.header {
   text-align: center;
 }
-form {
+
+.playerForm {
   display: grid;
   background-color: #222;
   padding: 1em;
@@ -26,28 +16,34 @@ form {
   max-width: 600px;
   padding: 1em;
   text-align: center;
-}
-form input {
-  background-color: #eee;
-  border: 1px solid #222;
-}
-form button {
-  font-family: inherit;
-  background-color: #eee;
-  color: #222;
-  padding: 0.7em;
-  width: 100%;
-  border: 0;
-}
 
-label {
-  padding: 0.5em 0.5em 0.5em 0.5em;
-}
+  input {
+    background-color: #eee;
+    border: 1px solid #222;
+    padding: 0.7em;
+    margin-bottom: 0.5rem;
 
-input {
-  padding: 0.7em;
-  margin-bottom: 0.5rem;
-}
-input:focus {
-  outline: 3px solid gold;
+    &:focus {
+      outline: 3px solid gold;
+    }
+
+    &.ng-touched {
+      &.ng-invalid {
+        border: 3px solid red;
+      }
+    }
+  }
+
+  button {
+    font-family: inherit;
+    background-color: #eee;
+    color: #222;
+    padding: 0.7em;
+    width: 100%;
+    border: 0;
+  }
+
+  label {
+    padding: 0.5em 0.5em 0.5em 0.5em;
+  }
 }
