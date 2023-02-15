@@ -1,27 +1,124 @@
 <h1>Welcome {{ playerName }}</h1>
-<p>{{ gameStatus }}</p>
-
-<br />
-<div class="gameControl">
-  <button (click)="game.actionStart(); gameStarted()">START</button>
-  <button (click)="game.actionStop(); gameStopped()">STOP</button>
-  <button (click)="game.actionReset()">RESET</button>
+<div class="gameInfo">
+  <div>
+    <p>history</p>
+  </div>
+  <div>
+    <p>{{ gameStatus }}</p>
+  </div>
+  <div>
+    <p>Your score: {{ score }}</p>
+  </div>
 </div>
-<div>
-  <tetris-core
-    #game
-    (lineCleared)="onLineCleared()"
-    (gameOver)="onGameOver()"
-  ></tetris-core>
+<div class="game">
+  <div class="gameHistory">
+    <div class="gameHistory__moveFilter">
+      <select [(ngModel)]="moveFilter">
+        <option [value]="'all moves'">All moves</option>
+        <option *ngFor="let move of moves" [value]="move">
+          {{ move }}
+        </option>
+      </select>
+    </div>
+    <div class="gameHistory__order">
+      <div>
+        <span *ngIf="historyOrder === 'DESC'">➤</span>
+        <span class="gameHistory__order--blocker" *ngIf="historyOrder === 'ASC'"
+          >➤</span
+        >
+        <p (click)="changeOrder('DESC')">Old</p>
+      </div>
+      <div>
+        <span *ngIf="historyOrder === 'ASC'">➤</span>
+        <span
+          class="gameHistory__order--blocker"
+          *ngIf="historyOrder === 'DESC'"
+          >➤</span
+        >
+        <p (click)="changeOrder('ASC')">New</p>
+      </div>
+    </div>
+    <div class="gameHistory__wrapper">
+      <ol class="gameHistory__list">
+        <li
+          *ngFor="
+            let historicMove of gameHistory
+              | filterByType : moveFilter
+              | sortHistory : historyOrder
+          "
+        >
+          {{ historicMove.displayTime }} - {{ historicMove.move }}
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="gameBoard">
+    <tetris-core
+      #game
+      (lineCleared)="onLineCleared()"
+      (gameOver)="onGameOver()"
+    ></tetris-core>
+  </div>
+  <div class="gameControl">
+    <p>Time played: {{ gameplayTime }}</p>
+    <div class="gameControl__status">
+      <button
+        [disabled]="isGameActive || gameStatus === 'GAME OVER'"
+        class="button"
+        (click)="game.actionStart(); gameStarted()"
+      >
+        start
+      </button>
+      <button
+        [disabled]="!isGameActive"
+        class="button"
+        (click)="game.actionStop(); gameStopped()"
+      >
+        stop
+      </button>
+      <button class="button" (click)="game.actionReset(); gameReset()">
+        reset
+      </button>
+    </div>
+    <div class="gameControl__moves">
+      <button
+        [disabled]="!isGameActive"
+        class="button"
+        (click)="game.actionLeft(); addToHistory('move left')"
+      >
+        left
+      </button>
+      <button
+        [disabled]="!isGameActive"
+        class="button"
+        (click)="game.actionRotate(); addToHistory('rotate')"
+      >
+        rotate
+      </button>
+      <button
+        class="button"
+        (click)="game.actionRight(); addToHistory('move right')"
+      >
+        right
+      </button>
+    </div>
+    <div class="gameControl__drops">
+      <button
+        [disabled]="!isGameActive"
+        class="button"
+        (click)="game.actionDrop(); addToHistory('drop')"
+      >
+        drop
+      </button>
+      <button
+        [disabled]="!isGameActive"
+        class="button"
+        (click)="game.actionDown(); addToHistory('move down')"
+      >
+        down
+      </button>
+    </div>
+
+    <button class="button" (click)="onExitClick()">exit game</button>
+  </div>
 </div>
-
-<button (click)="game.actionRotate()">ROTATE</button>
-<button (click)="game.actionLeft()">LEFT</button>
-<button (click)="game.actionRight()">RIGHT</button>
-<button (click)="game.actionDown()">DOWN</button>
-<button (click)="game.actionDrop()">DROP</button>
-
-<p>Your score: {{ score }}</p>
-<p>Time played: {{ gameplayTime }}</p>
-
-<button (click)="onClick()">EXIT GAME</button>

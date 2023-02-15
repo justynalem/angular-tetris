@@ -3,11 +3,9 @@
 </div>
 
 <div *ngIf="readyToPlay">
-  <div class="container">
-    <app-game
-      class="gameContainer"
-      [playerName]="activePlayer"
-      (onGameExit)="onGameFinished($event)"
-    ></app-game>
-  </div>
+  <app-game
+    class="gameContainer"
+    [playerName]="activePlayer"
+    (onGameExit)="onGameFinished($event)"
+  ></app-game>
 </div>

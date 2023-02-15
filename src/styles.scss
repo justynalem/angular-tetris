@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: "Press Start 2P", sans-serif;
+  color: #eee;
+  background-color: #222;
+}
+
+tetris-core {
+  tile {
+    background: white;
+    &.color-s {
+      background: #228b22;
+    }
+  }
+}

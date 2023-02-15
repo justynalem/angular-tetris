@@ -8,8 +8,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'tetris';
 
-  public activePlayer: string = '';
-  public readyToPlay = false;
+  public activePlayer = '';
+  public readyToPlay = true;
 
   public onFormCompleted(playerName: string) {
     if (playerName) {
